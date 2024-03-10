@@ -1,3 +1,4 @@
+
 <img class="img-fluid" align="center" src="https://github.com/ExtrieveTechnologies/QuickCapture/blob/main/QuickCapture.png?raw=true" width="30%" alt="img-verification"><img align="right" class="img-fluid" padding="10px" src="https://github.com/ExtrieveTechnologies/QuickCapture/blob/main/android.png?raw=true?raw=true" alt="img-verification">
 
 # SplicerAi Intelligent Document Analysis SDK
@@ -45,18 +46,18 @@ AiDocument DocumentObject = new AiDocument(ImagePath);
     ```
 	Once the document type identified same also will be available in the **TYPE** property of **DocumentObject** .Following is the response structure :
 	```JSON
-		//Respose JSON data
-		{
-		   DOCNAME: "<name/type of document>",
-		   Confidence: "<Level of accuracy /High>",
-		   predictedDocs: {
-			 //If any other documents detected,
-			 //Same will list out with the confidence level
-		      Aadhaar: "HIGH"
-		   },
-		   //classification succes or not
-		   CLASSIFICATION: true/false,
-		}
+	//Respose JSON data
+	{
+	   DOCNAME: "<name/type of document>",
+	   Confidence: "<Level of accuracy /High>",
+	   predictedDocs: {
+		 //If any other documents detected,
+		 //Same will list out with the confidence level
+	      Aadhaar: "HIGH"
+	   },
+	   //classification succes or not
+	   CLASSIFICATION: true/false,
+	}
 	```
 
 2. **KYCExtract**
@@ -74,22 +75,22 @@ ExtractData Method from DocumentObject will provide the extracted data from the 
 	```
 	Once the document data extracted, same will be available in the DATA property of DocumentObject.Following is the response structure :
 	```JSON
-		{
-		   DOCNAME: "AADHAAR",
-		   Confidence: "High",
-		   predictedDocs: {
-		      Aadhaar: "HIGH"
-		   },
-		   CLASSIFICATION: true,
-		   //Extracted data from KYC document
-		   KEYVALUE: {
-		      NAME: "NAME",
-		      GENDER: "MALE",
-		      DOB: "16/09/1981",
-		      AADHAARNO: "2513 5077 5668",
-		      FILENAME: ""
-		   }
-		}
+	{
+	   DOCNAME: "AADHAAR",
+	   Confidence: "High",
+	   predictedDocs: {
+	      Aadhaar: "HIGH"
+	   },
+	   CLASSIFICATION: true,
+	   //Extracted data from KYC document
+	   KEYVALUE: {
+	      NAME: "NAME",
+	      GENDER: "MALE",
+	      DOB: "16/09/1981",
+	      AADHAARNO: "2513 5077 5668",
+	      FILENAME: ""
+	   }
+	}
 	```
 3. **GetKYCDocList**
 	 GetKYCDocList Method from **DocumentObject** will provide the list of available KYC document.
@@ -99,36 +100,36 @@ ExtractData Method from DocumentObject will provide the extracted data from the 
     ```
     Following is a sample response structure :
 	```JSON
-		["AADHAAR","PAN","PASSPORT"]
+	["AADHAAR","PAN","PASSPORT"]
 	```
 
 4. **KYCVerify**
-			 KYCVerify Method from **DocumentObject** will verify the KYC document with the **TYPE** provided.
+	KYCVerify Method from **DocumentObject** will verify the KYC document with the **TYPE** provided.
 	```java
-		//KYCVerify will use callback function to return the result.
-		DocumentObject.KYCVerify("PAN",handleKYCVerifytCallBack);
-		*@param "Type of document to verify can get from GetKYCDocList Method".
-		*@param "A callback method to capture the KYCVerification response".
-	    
-		function handleKYCVerifyCallBack(resultJson) 	{
-			//Process the resultJson
-		}
-		
-		//Or use lambda function
-		DocumentObject.KYCVerify("PAN",resultJson -> {
-			//Detected response JSON
-		});
+	//KYCVerify will use callback function to return the result.
+	DocumentObject.KYCVerify("PAN",handleKYCVerifytCallBack);
+	*@param "Type of document to verify can get from GetKYCDocList Method".
+	*@param "A callback method to capture the KYCVerification response".
+    
+	function handleKYCVerifyCallBack(resultJson) 	{
+		//Process the resultJson
+	}
+	
+	//Or use lambda function
+	DocumentObject.KYCVerify("PAN",resultJson -> {
+		//Detected response JSON
+	});
 	```
 	
     Following is a sample response structure :
 	
 	```JSON
-		{
-		   STATUS: true/false,
-		   //success/failure
-		   CONFIDENCE : "LOW/MEDIUM/HIGH"
-		   //if STATUS is success 
-		 }
+	{
+	   STATUS: true/false,
+	   //success/failure
+	   CONFIDENCE : "LOW/MEDIUM/HIGH"
+	   //if STATUS is success 
+	 }
 	```
 	 
 **AADHAAR MASKING**
@@ -157,24 +158,24 @@ ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResul
 On AadhaarMask intent call, requires document id of previously created AiDocument Object.
 The respose data will be in following structure :
 ```JSON
-	{
-	   STATUS: true/false,
-	   //Masking activity status
-	   DESCRIPTION : "SUCCESS",
-	   //Success or failure description
-	   MASKING_STATUS : true,
-	   //Extracted data from KYC document
-	   MASKING_STATUS: {
-	      COUNT : "10",
-	      //Number of masking done
-	      AADHAAR_NO: "2513 5077 5668",
-	      //Can enable & disable in config.
-	      MASKED_METHOD: "MANUAL/SYSTEM"
-	      //Specify how the masking happened
-	   }
-	   FILE : "<File path of masked image>"
-	   //eg : "/storage/files/Splicer/SP_20240122_183209.jpg"
-	}
+{
+   STATUS: true/false,
+   //Masking activity status
+   DESCRIPTION : "SUCCESS",
+   //Success or failure description
+   MASKING_STATUS : true,
+   //Extracted data from KYC document
+   MASKING_STATUS: {
+      COUNT : "10",
+      //Number of masking done
+      AADHAAR_NO: "2513 5077 5668",
+      //Can enable & disable in config.
+      MASKED_METHOD: "MANUAL/SYSTEM"
+      //Specify how the masking happened
+   }
+   FILE : "<File path of masked image>"
+   //eg : "/storage/files/Splicer/SP_20240122_183209.jpg"
+}
 ```
 
 ---
