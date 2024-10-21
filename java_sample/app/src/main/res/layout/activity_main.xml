@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:layout_gravity="top|center"
+        android:background="@color/white"
+        android:elevation="10sp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="5sp"
+        android:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="25sp"
+            android:paddingEnd="25sp"
+            android:text="@string/splicerai_demo_application"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/Imageview_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/displayImageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            android:padding="10sp"
+            android:src="@drawable/logofirst"
+            android:contentDescription="@string/imgDescription"/>
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/control"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/maskImageButton"
+            android:layout_width="110sp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_bg"
+            android:orientation="vertical"
+            android:padding="5sp">
+
+            <ImageView
+                android:layout_width="30sp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/mask_btn_img"
+                app:tint="@color/purple_500"
+                android:contentDescription="@string/imgDescription"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="3sp"
+                android:text="@string/mask_image"
+                android:textColor="@color/purple_500"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/extractButton"
+            android:layout_width="110sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:background="@drawable/button_bg"
+            android:orientation="vertical"
+            android:padding="5sp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/extract_text_btn"
+                app:tint="@color/purple_500"
+                android:contentDescription="@string/imgDescription"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="3sp"
+                android:text="@string/text_extract"
+                android:textColor="@color/purple_500"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/textractButton"
+            android:layout_width="110sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:background="@drawable/button_bg"
+            android:orientation="vertical"
+            android:padding="5sp"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/textract_text_btn"
+                app:tint="@color/purple_500"
+                android:contentDescription="@string/imgDescription"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="3sp"
+                android:text="@string/textract"
+                android:textColor="@color/purple_500"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/kycAnalyseButton"
+            android:layout_width="110sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20sp"
+            android:layout_marginEnd="10sp"
+            android:background="@drawable/button_bg"
+            android:orientation="vertical"
+            android:padding="5sp">
+
+            <ImageView
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/textract_text_btn"
+                app:tint="@color/purple_500"
+                android:contentDescription="@string/imgDescription"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="3sp"
+                android:text="@string/kyc_analyse"
+                android:textColor="@color/purple_500"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/buildOutputButton"
+            android:layout_width="110sp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
+            android:background="@drawable/button_bg"
+            android:orientation="vertical"
+            android:padding="5sp">
+
+            <ImageView
+                android:layout_width="30sp"
+                android:layout_height="30sp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/save_btn_img"
+                app:tint="@color/purple_500"
+                android:contentDescription="@string/imgDescription"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="3sp"
+                android:text="@string/build_output"
+                android:textColor="@color/purple_500"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

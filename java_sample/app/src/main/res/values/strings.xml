@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">SplicerAI</string>
+    <!-- Strings used for fragments for navigation -->
+
+    <string name="no_data_found">No data found</string>
+    <string name="imgDescription">imgDescription</string>
+    <string name="build_output">Save Document</string>
+    <string name="kyc_analyse">KYC Analyse</string>
+    <string name="text_extract">Text Extract</string>
+    <string name="mask_image">Mask Image</string>
+    <string name="splicerai_demo_application">SplicerAi Demo Application</string>
+    <string name="kyc_document_analysis">KYC Document Analysis</string>
+    <string name="textract">Textract</string>
+    <string name="detect">Detect</string>
+    <string name="extract">Extract</string>
+    <string name="verify">Verify</string>
+    <string name="data">DATA</string>
+    <string name="json">JSON</string>
+    <string name="create_newdoc">Create NewDoc</string>
+    <string name="goto_processing_page">Goto processing page</string>
+    <string name="get_status">Get Status</string>
+    <string name="get_result">Get Result</string>
+    <string name="text_data">Text Data</string>
+    <string name="doc_find">Doc Find</string>
+    <string name="json_data">Json Data</string>
+</resources>

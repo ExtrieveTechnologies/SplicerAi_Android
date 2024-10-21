@@ -1,0 +1,62 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    signingConfigs {
+        release {
+        storeFile file('D:\\SVN\\techcomponents\\Capture\\MobileApp\\SDK\\SplicerAi\\android\\v2.0\\AndroidAppKeyStore\\SplicerAiTest.jks')
+            storePassword 'admin324'
+            keyAlias 'key0'
+            keyPassword 'admin324'
+        }
+    }
+    namespace 'com.extrieve.splicerai'
+    compileSdk 32
+
+    defaultConfig {
+        applicationId "com.extrieve.splicerai"
+        minSdk 21
+        targetSdk 34
+        versionCode 1
+        versionName '2.0.0'
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            jniDebuggable false
+            multiDexEnabled true
+            debuggable false
+            shrinkResources true
+            signingConfig signingConfigs.release
+        }
+        debug {
+            jniDebuggable true
+        }
+    }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.5.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.navigation:navigation-fragment:2.5.0'
+    implementation 'androidx.navigation:navigation-ui:2.5.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+
+    /*DEV_HELP : link the preferred SDK version from maven repo by extrieve.*/
+    implementation 'com.extrieve.splicer.aisdk:SplicerAIv2:2.0.7'
+}
