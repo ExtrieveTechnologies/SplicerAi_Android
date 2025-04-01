@@ -1,6 +1,6 @@
 <img align="right" class="img-fluid" padding="10px" src="https://raw.githubusercontent.com/ExtrieveTechnologies/QuickCapture/main/img/android.png" alt="img-verification">
 
-#  SplicerAi ANDROID v2.0
+#  SplicerAi v2.0
 SplicerAi is an intelligent document analysis SDK offering the following functionalities:
 
 1.  **Document Identification / Classification** : _Identification and categorization of documents_.
