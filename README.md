@@ -28,10 +28,9 @@ repositories {
 
 //Then add implementation for SDK in dependencies in build.gradle (module:<yourmodulename>)
 dependencies {
-  implementation 'com.extrieve.splicer.aisdk:SplicerAIv2:<SDK-VERSION>'
-  // Latest version: 2.0.15
+  implementation 'com.extrieve.splicer.aisdk:SplicerAIv2:2.0.17'
 }
-SDK-VERSION - Need to replace with the correct v2 series.
+
 ```
 
 Or Maven:
@@ -42,7 +41,7 @@ Or Maven:
   <artifactId>SplicerAIv2</artifactId>
   <version>SDK-VERSION</version>
 </dependency>
-SDK-VERSION - Need to replace with the correct v2 series.
+//SDK-VERSION - Need to replace with the correct v2 series.
 ```
 
 Or can even integrate with the **.aar** library file and manually add the file dependency to the project/app.
@@ -52,11 +51,20 @@ Compatibility
 -------------
  * **JAVA 17 Support**: QuickCapture v4 requires JAVA version 17 support for the application.
  * **Minimum Android SDK**: QuickCapture v4 requires a minimum API level of 21.
- * **Target Android SDK**: QuickCapture v4 features supports **API 34**.
-  * **Compiled SDK Version**: QuickCapture v4 compiled against **API 33**.Host application using this SDK should compiled against 33 or later
- ----
+ * **Target Android SDK**: QuickCapture v4 features supports **API 35**.
+  * **Compiled SDK Version**: QuickCapture v4 compiled against **API 34**.Host application using this SDK should compiled against 33 or later
 
+  ## Run-time requirement
+- [x] This SDK is designed to run on officially supported Android & iOS devices only.
+- [x] On Android, Google Play Services is mandatory.
+- [x] Supported CPU architectures: arm64-v8a and armeabi-v7a.
+- [x] Simulator and emulator environments are not supported.For testing on simulators, please contact the development support team to request a dedicated test version compatible with those environments.
 Depending on your specific needs, you can import and use one or all of the classes provided by the SDK.
+
+# API &  integration  Details 
+Available properties and method
+
+SDK has one core class and one supporting classe :
 ```java
 import com.extrieve.splicer.aisdk.*;
 //OR : can import only required classes as per use cases.
