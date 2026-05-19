@@ -167,19 +167,19 @@ Once document data is extracted, the same will be available in **DATA** property
   "DATA": { 
     "AADHAAR NO": {
       "VALUE": "2513 5077 5668",
-      "CONFIDENCE": "HIGH/MEDIUM/LOW"
+      "CONFIDENCE": "HIGH"
     },
     "ADDRESS": {
       "VALUE": "ADDRESS",
-      "CONFIDENCE": "HIGH/MEDIUM/LOW"
+      "CONFIDENCE": "LOW"
     },
     "DOB": {
       "VALUE": "16/09/1981",
-      "CONFIDENCE": "HIGH/MEDIUM/LOW"
+      "CONFIDENCE": "MEDIUM"
     },
     "GENDER": {
       "VALUE": "MALE",
-      "CONFIDENCE": "HIGH/MEDIUM/LOW"
+      "CONFIDENCE": "HIGH"
     },
     "NAME": {
       "VALUE": "",
@@ -272,18 +272,18 @@ Following is a sample JSON response structure for default behaviour and when `pl
           "items": [
             {
               "text": "Government of India",
-              "left": 0.266875,
-              "top": 0.13664185,
-              "right": 0.56312495,
-              "bottom": 0.1752785,
+              "left": 266,
+              "top": 136,
+              "right": 563,
+              "bottom": 1752,
               "confidence": 96.03078
             },
             {
               "text": "SUPARNA HAZRA",
-              "left": 0.27875,
-              "top": 0.23841645,
-              "right": 0.556875,
-              "bottom": 0.27422604,
+              "left": 278,
+              "top": 238,
+              "right": 556,
+              "bottom": 274,
               "confidence": 97.0783
             }
           ]
