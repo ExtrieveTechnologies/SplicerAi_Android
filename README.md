@@ -28,9 +28,10 @@ repositories {
 
 //Then add implementation for SDK in dependencies in build.gradle (module:<yourmodulename>)
 dependencies {
-  implementation 'com.extrieve.splicer.aisdk:SplicerAIv2:2.0.17'
+  implementation 'com.extrieve.splicer.aisdk:SplicerAIv2:<SDK-VERSION>'
+  // Latest version: 2.0.29
 }
-
+SDK-VERSION - Need to replace with the correct v2 series.
 ```
 
 Or Maven:
@@ -41,7 +42,7 @@ Or Maven:
   <artifactId>SplicerAIv2</artifactId>
   <version>SDK-VERSION</version>
 </dependency>
-//SDK-VERSION - Need to replace with the correct v2 series.
+SDK-VERSION - Need to replace with the correct v2 series.
 ```
 
 Or can even integrate with the **.aar** library file and manually add the file dependency to the project/app.
@@ -49,22 +50,24 @@ Or can even integrate with the **.aar** library file and manually add the file d
 
 Compatibility
 -------------
- * **JAVA 17 Support**: QuickCapture v4 requires JAVA version 17 support for the application.
- * **Minimum Android SDK**: QuickCapture v4 requires a minimum API level of 21.
- * **Target Android SDK**: QuickCapture v4 features supports **API 35**.
-  * **Compiled SDK Version**: QuickCapture v4 compiled against **API 34**.Host application using this SDK should compiled against 33 or later
+ * **JAVA 17 Support**: SplicerAI v2 requires JAVA version 17 support for the application.
+ * **Minimum Android SDK**: SplicerAI v2 requires a minimum API level of 21.
+ * **Target Android SDK**: SplicerAI v2 features supports **API 36**.
+  * **Compiled SDK Version**: SplicerAI v2 compiled against **API 34**.Host application using this SDK should compiled against 34 or later
+ ----
 
-  ## Run-time requirement
-- [x] This SDK is designed to run on officially supported Android & iOS devices only.
-- [x] On Android, Google Play Services is mandatory.
-- [x] Supported CPU architectures: arm64-v8a and armeabi-v7a.
-- [x] Simulator and emulator environments are not supported.For testing on simulators, please contact the development support team to request a dedicated test version compatible with those environments.
-Depending on your specific needs, you can import and use one or all of the classes provided by the SDK.
+ Run-time requirement
+-------------
+ * On Android, Google Play Services is mandatory.
+ * Supported CPU architectures: arm64-v8a and armeabi-v7a.
+ * Simulator and emulator environments are not supported.For testing on simulators, please contact the development support team to request a dedicated test version compatible with those environments.
+ * Depending on your specific needs, you can import and use one or all of the classes provided by the SDK.
+----
 
-# API &  integration  Details 
+API & integration Details
+-------------
 Available properties and method
-
-SDK has one core class and one supporting classe :
+SDK has one core class and one supporting class :
 ```java
 import com.extrieve.splicer.aisdk.*;
 //OR : can import only required classes as per use cases.
@@ -95,8 +98,8 @@ KYCDetect Method from **DocumentObject** will provide the **type of KYC document
     
   ```java
   //KYCDetect will use callback function to return the result.
-  DocumentObject.KYCDetect(handleKYCDetectCallBack);
-  function handleKYCDetectCallBack(resultJson) {
+  DocumentObject.KYCDetect(this::handleKYCDetectCallBack);
+  private void handleKYCDetectCallBack(resultJson) {
       //Use detect respose resultJson here
   }
   //Or use lambda 
@@ -111,15 +114,16 @@ Once the document type is identified, same will also be available in the **TYPE*
 ```json
 //Respose JSON data
 {
-   DOCNAME: "<name/type of document>",
-   Confidence: "<Level of accuracy /High>",
+  "STATUS": true,
+  "DESCRIPTION":"<Description + subtype of document>",
+   "TYPE" : "Name/type of document>",
+   "SUBTYPE":"<subtype of document>", // AADHAAR_BACK
+   "Confidence" : "<Level of accuracy: High/Medium/Low>",
    predictedDocs: {
 	 //If any other documents are detected,
 	 //Same will be listed out with the confidence level
       Aadhaar: "HIGH"
    },
-   //classification succes or not
-   CLASSIFICATION: true/false,
 }
 
 ```
@@ -129,8 +133,8 @@ KYCExtract Method from **DocumentObject** will provide extracted data from the p
     
 ```java
 //KYCDetect will use callback function to return the result.
-DocumentObject.KYCExtract(handleKYCExtractCallBack);
-function handleKYCExtractCallBack(resultJson) {
+DocumentObject.KYCExtract(this::handleKYCExtractCallBack);
+private void handleKYCExtractCallBack(resultJson) {
   // Code to process the resultJson
 }
 //Or use lambda 
@@ -144,22 +148,45 @@ Once document data is extracted, the same will be available in **DATA** property
     
 ```json
 {
-   DOCNAME: "AADHAAR",
-   Confidence: "High",
-   predictedDocs: {
-      Aadhaar: "HIGH"
-   },
-   CLASSIFICATION: true,
-   //Extracted data from KYC document
-   KEYVALUE: {
-      NAME: "NAME",
-      GENDER: "MALE",
-      DOB: "16/09/1981",
-      AADHAARNO: "2513 5077 5668",
-      FILENAME: ""
-   }
+  "STATUS": true,
+  "DESCRIPTION": "AADHAAR_FRONT",// Description of operation - includes "subtype"
+  "TYPE": "AADHAAR",
+  "SUBTYPE": "AADHAAR_FRONT",//Dedicated Subtype (specify document front/back)
+  "CONFIDENCE": "HIGH",
+  "OCR_QUALITY": "DEFAULT",
+  "PREDICTED_DOCS": {
+    "AADHAAR": "HIGH"
+  },
+  "KEYVALUE": { 
+	  "NAME": "NAME", 
+	  "GENDER": "MALE", 
+	  "DOB": "16/09/1981", 
+	  "AADHAARNO": "2513 5077 5668", 
+	  "FILENAME": ""  
+  },
+  "DATA": { 
+    "AADHAAR NO": {
+      "VALUE": "2513 5077 5668",
+      "CONFIDENCE": "HIGH"
+    },
+    "ADDRESS": {
+      "VALUE": "ADDRESS",
+      "CONFIDENCE": "LOW"
+    },
+    "DOB": {
+      "VALUE": "16/09/1981",
+      "CONFIDENCE": "MEDIUM"
+    },
+    "GENDER": {
+      "VALUE": "MALE",
+      "CONFIDENCE": "HIGH"
+    },
+    "NAME": {
+      "VALUE": "",
+      "CONFIDENCE": "" // For empty value, confidence also will be empty
+    }
+  }
 }
-
 ```
     
 ## 3.  **GetKYCDocList**  
@@ -181,11 +208,11 @@ KYCVerify Method from **DocumentObject** will verify KYC document with the **TYP
     
 ```java
 //KYCVerify will use callback function to return the result.
-DocumentObject.KYCVerify("PAN",handleKYCVerifytCallBack);
+DocumentObject.KYCVerify("PAN",this::handleKYCVerifytCallBack);
 *@param "Type of document to verify can get from GetKYCDocList Method".
 *@param "A callback method to capture the KYCVerification response".
    
-function handleKYCVerifyCallBack(resultJson) 	{
+private void handleKYCVerifyCallBack(resultJson) 	{
 	//Process the resultJson
 }
 
@@ -199,12 +226,118 @@ Following is a sample response structure :
 ```json
 {
    STATUS: true/false,
+   DESCRIPTION: "<Verified Successfully/failed>",
    //success/failure
-   CONFIDENCE : "LOW/MEDIUM/HIGH"
+   CONFIDENCE : "LOW/MEDIUM/HIGH",
    //if STATUS is success 
+   OCRQUALITY: "<ocrquality>"
  }
 ```
-    
+
+## 5. **GetOCRText**
+Retrieves OCR text data from the currently loaded image.
+
+By default, `GetOCRText()` returns OCR text with bounding coordinates.
+
+Depending on the value of `plainOCRText`:
+
+- `true` → returns only OCR text content
+- `false` → returns OCR text along with bounding box
+
+```java
+// Default behavior: returns OCR text with bounding coordinates
+DocumentObject.GetOCRText(this::handleOCRTextCallback);
+
+private void handleOCRTextCallback(String response) {
+    // Process the resultJson
+}
+
+// Or use lambda function
+DocumentObject.GetOCRText(response -> {
+    // Process the resultJson
+});
+```
+Following is a sample JSON response structure for default behaviour and when `plainOCRText = false`
+```json
+{
+  "status": true,
+  "description": "OCR Extraction Successful",
+  "data": {
+    "Document": {
+      "fileName": "da1802f0c08d4c50b578d24a11166d55",
+      "pages": [
+        {
+          "width": 1164,
+          "height": 772,
+          "items": [
+            {
+              "text": "Government of India",
+              "left": 266,
+              "top": 136,
+              "right": 563,
+              "bottom": 1752,
+              "confidence": 96.03078
+            },
+            {
+              "text": "SUPARNA HAZRA",
+              "left": 278,
+              "top": 238,
+              "right": 556,
+              "bottom": 274,
+              "confidence": 97.0783
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+For getting plain OCR text only:
+```java
+ DocumentObject.GetOCRText(true, this::handleOCRTextCallback);
+
+/**
+ * @param plainOCRText
+ *        true  ->  include only OCR text
+ *        false ->  include OCR text with bounding coordinates
+ *
+ * @param callback
+ *        A callback method to capture the GetOCRText response.
+ */
+private void handleOCRTextCallback(String response) {
+    // Process the resultJson
+}
+
+// Or use lambda function
+DocumentObject.GetOCRText(true, response -> {
+    // Process the resultJson
+});
+```
+Following is a sample JSON response structure when `plainOCRText = true`
+```json
+{
+  "status": true,
+  "description": "OCR Extraction Successful",
+  "data": {
+    "Document": {
+      "fileName": "da1802f0c08d4c50b578d24a11166d55",
+      "pages": [
+        {
+          "width": 738,
+          "height": 1600,
+          "items": [
+            "Government of India",
+            "SUPARNA HAZRA",
+            "Female"
+          ]
+        }
+      ]
+    }
+  }
+}
+
+```
 
 # **AADHAAR MASKING**
 
@@ -299,22 +432,27 @@ The SDK includes a supporting class called for static configuration. This class 
 ### Document supported
 **Indian KYC Documents** : List of KYC documents, their respective subtypes, and the key-value pairs "expected" from the current trained set of the SplicerAi :
 
-1.  **PAN CARD** : NAME, FATHER'S NAME, DOB, PAN NO
-2.  **AADHAAR** : NAME, DOB, GENDER, AADHAAR NO, ADDRESS, YEAR OF BIRTH
-3.  **Driving License** : NAME, DOB, S/D/W, ADDRESS, DATE OF ISSUE, DATE OF EXPIRY, LICENSE NO.
-4.  **VOTER ID** : NAME, DOB, GUARDIAN'S NAME, ADDRESS, UID, GENDER
-5.  **PASSPORT** : SURNAME, GIVEN NAME, DOB, DATE OF ISSUE, DATE OF EXPIRY, PASSPORT NO, PLACE OF BIRTH, PLACE OF ISSUE, GENDER, NATIONALITY, COUNTRY CODE
+1. **PAN_CARD** : NAME, FATHER'S NAME, DOB, PAN NO, DATE OF INCORPORATION, BUSINESS NAME
+2. **AADHAAR** : NAME, DOB, GENDER, AADHAAR NO, ADDRESS
+3. **DRIVING_LICENSE** : NAME, DOB, S/D/W, ADDRESS, DATE OF ISSUE, DATE OF EXPIRY, LICENSE NO.
+4. **VOTER_ID** : NAME, DOB, GUARDIAN'S NAME, ADDRESS, UID, GENDER
+5. **PASSPORT** : SURNAME, GIVEN NAME, DOB, DATE OF ISSUE, DATE OF EXPIRY, PASSPORT NO, PLACE OF BIRTH, PLACE OF ISSUE, GENDER, COUNTRY, COUNTRY CODE
 
-Following are the extra subtype supported : (subtypes will provided as part of description)
+Following are the extra subtype supported : (subtypes will provided as part of **SUBTYPE** poreperty in resposnse & also will available in **DESCRIPTION**)
 
-1.  **PAN Card** – PAN_CORPORATE
-2.  **Passport** – PASSPORT_BACK
-3.  **Voter Id** – VOTER_ID_BACK
-4.  **Driving Licence** – DL_BACK
+1.  **PAN_CARD** – PAN_CORPORATE
+2.  **PASSPORT** – PASSPORT_BACK
+3.  **VOTER_ID** – VOTER_ID_BACK
+4.  **DRIVING_LICENSE** – DL_BACK
+5.  **AADHAAR** – AADHAAR_BACK
+
+Notes
+-------------
 
 ### Regarding accuracy :
-*The accuracy of Detection & Extaction technologies depends significantly on the quality of input images, including factors such as image wrapping, stretching, angle of rotation, lighting conditions, and colour consistency. While offline solutions are effective for reducing manual efforts in scenarios having additional verification measures, cannot guarantee 100% accuracy.Even though we are aiming and provinding 88-95% accuracy.*
+*The accuracy of Detection & Extaction technologies depends significantly on the quality of input images, including factors such as image wrapping, stretching, angle of rotation, lighting conditions, and colour consistency. While offline solutions are effective for reducing manual efforts in scenarios having additional verification measures, cannot guarantee 100% accuracy.Even though we are aiming and providing 85-95% accuracy on various operation*
+
 
 **Extrieve** - *Your Expert in Document Management & AI Solutions.*
 
-[© 1996 - 2025 Extrieve Technologies](https://www.extrieve.com/)
+[© 1996 - 2026 Extrieve Technologies](https://www.extrieve.com/)
